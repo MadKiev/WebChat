@@ -1,0 +1,9 @@
+com/gmail/madkiev/model/ChatMessage$MessageType.class
+com/gmail/madkiev/bot/SimpleBot$1.class
+com/gmail/madkiev/bot/SimpleBot.class
+com/gmail/madkiev/WebsocketDemoApplication.class
+com/gmail/madkiev/bot/SimpleBot$2.class
+com/gmail/madkiev/model/ChatMessage.class
+com/gmail/madkiev/controller/ChatController.class
+com/gmail/madkiev/config/WebSocketConfig.class
+com/gmail/madkiev/controller/WebSocketEventListener.class
