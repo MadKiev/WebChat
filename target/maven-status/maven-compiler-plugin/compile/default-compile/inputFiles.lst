@@ -1,5 +1,6 @@
-/Users/MadKiev/Documents/webChat/src/main/java/com/example/websocketdemo/controller/ChatController.java
-/Users/MadKiev/Documents/webChat/src/main/java/com/example/websocketdemo/WebsocketDemoApplication.java
-/Users/MadKiev/Documents/webChat/src/main/java/com/example/websocketdemo/controller/WebSocketEventListener.java
-/Users/MadKiev/Documents/webChat/src/main/java/com/example/websocketdemo/config/WebSocketConfig.java
-/Users/MadKiev/Documents/webChat/src/main/java/com/example/websocketdemo/model/ChatMessage.java
+/Users/MadKiev/Documents/webChat/src/main/java/com/gmail/madkiev/WebsocketDemoApplication.java
+/Users/MadKiev/Documents/webChat/src/main/java/com/gmail/madkiev/controller/WebSocketEventListener.java
+/Users/MadKiev/Documents/webChat/src/main/java/com/gmail/madkiev/config/WebSocketConfig.java
+/Users/MadKiev/Documents/webChat/src/main/java/com/gmail/madkiev/bot/SimpleBot.java
+/Users/MadKiev/Documents/webChat/src/main/java/com/gmail/madkiev/model/ChatMessage.java
+/Users/MadKiev/Documents/webChat/src/main/java/com/gmail/madkiev/controller/ChatController.java

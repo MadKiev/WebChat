@@ -1,5 +1,6 @@
 package com.gmail.madkiev.controller;
 
+import com.gmail.madkiev.bot.MyBot;
 import com.gmail.madkiev.model.ChatMessage;
 import org.springframework.messaging.handler.annotation.MessageMapping;
 import org.springframework.messaging.handler.annotation.Payload;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Controller;
 public class ChatController {
     @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage){
+    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
         return chatMessage;
     }
 
@@ -22,5 +23,11 @@ public class ChatController {
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }
-
+    @MessageMapping("/сhat.sendmessage")
+    @SendTo("/topic/public")
+        //ChatMessage был вместо String
+    public String chatBot(@Payload ChatMessage chatMessage){
+        MyBot bot = new MyBot();
+        return bot.sayInReturn(chatMessage. getContent());
+    }
 }

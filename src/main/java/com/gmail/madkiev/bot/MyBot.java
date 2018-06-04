@@ -1,13 +1,11 @@
 package com.gmail.madkiev.bot;
 
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Random;
+import javax.validation.constraints.NotNull;
+import java.util.*;
 import java.util.regex.Pattern;
 
-public class SimpleBot {
-    final String[] COMMON_PHRASES = {
+public class MyBot {
+    String[] commonPhrases = {
             "Нет ничего ценнее слов, сказанных к месту и ко времени.",
             "Порой молчание может сказать больше, нежели уйма слов.",
             "Перед тем как писать/говорить всегда лучше подумать.",
@@ -18,7 +16,7 @@ public class SimpleBot {
             "Записывая слова, мы удваиваем их силу.",
             "Кто ясно мыслит, тот ясно излагает.",
             "Боюсь Вы что-то не договариваете."};
-    final String[] ELUSIVE_ANSWERS = {
+    String[] exclusiveAsnwers = {
             "Вопрос непростой, прошу тайм-аут на раздумья.",
             "Не уверен, что располагаю такой информацией.",
             "Может лучше поговорим о чём-то другом?",
@@ -29,7 +27,7 @@ public class SimpleBot {
             "Уверен, Вы уже догадались сами.",
             "Зачем Вам такая информация?",
             "Давайте сохраним интригу?"};
-    final Map<String, String> PATTERNS_FOR_ANALYSIS = new HashMap<String, String>() {{
+    Map<String, String> patternForAnalisis = new HashMap<String, String>() {{
         // hello
         put("хай", "hello");
         put("привет", "hello");
@@ -69,7 +67,7 @@ public class SimpleBot {
         put("увидимся", "bye");
         put("до\\s.*свидания", "bye");
     }};
-    final Map<String, String> ANSWERS_BY_PATTERNS = new HashMap<String, String>() {{
+    Map<String, String> answersByPatterns = new HashMap<String, String>() {{
         put("hello", "Здравствуйте, рад Вас видеть.");
         put("who", "Я обычный чат-бот.");
         put("name", "Зовите меня Чаттер :)");
@@ -84,25 +82,29 @@ public class SimpleBot {
     Random random; // for random answers
     Date date; // for date and time
 
-    public SimpleBot() {
+    public MyBot() {
         random = new Random();
         date = new Date();
     }
 
-    public String sayInReturn(String msg, boolean ai) {
-        String say = (msg.trim().endsWith("?"))?
-                ELUSIVE_ANSWERS[random.nextInt(ELUSIVE_ANSWERS.length)]:
-                COMMON_PHRASES[random.nextInt(COMMON_PHRASES.length)];
-        if (ai) {
-            String message =
-                    String.join(" ", msg.toLowerCase().split("[ {,|.}?]+"));
-            for (Map.Entry<String, String> o : PATTERNS_FOR_ANALYSIS.entrySet()) {
-                pattern = Pattern.compile(o.getKey());
-                if (pattern.matcher(message).find())
-                    if (o.getValue().equals("whattime")) return date.toString();
-                    else return ANSWERS_BY_PATTERNS.get(o.getValue());
-            }
+
+    public String sayInReturn(String msg) {
+        String say = (msg.trim().endsWith("?")) ?
+                exclusiveAsnwers[random.nextInt(exclusiveAsnwers.length)] :
+                commonPhrases[random.nextInt(commonPhrases.length)];
+
+        String message =
+                String.join(" ", msg.toLowerCase().split("[ {,|.}?]+"));
+        for (Map.Entry<String, String> o : patternForAnalisis.entrySet()) {
+            pattern = Pattern.compile(o.getKey());
+            if (pattern.matcher(message).find())
+                if (o.getValue().equals("whattime")) return date.toString();
+                else return answersByPatterns.get(o.getValue());
         }
+
         return say;
+
     }
 }
+
+

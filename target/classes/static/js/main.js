@@ -10,6 +10,9 @@ var connectingElement = document.querySelector('.connecting');
 
 var stompClient = null;
 var username = null;
+var bot = "jarvis";
+var chatBot = null;
+
 
 var colors = [
     '#2196F3', '#32c787', '#00BCD4', '#ff5652',
@@ -35,6 +38,8 @@ function connect(event) {
 function onConnected() {
     // Subscribe to the Public Topic
     stompClient.subscribe('/topic/public', onMessageReceived);
+     stompClient.subscribe('/topic/public', chatBot);
+     stompClient.send(bot.sayInReturn);
 
     // Tell your username to the server
     stompClient.send("/app/chat.addUser",
@@ -71,7 +76,6 @@ function onMessageReceived(payload) {
     var message = JSON.parse(payload.body);
 
     var messageElement = document.createElement('li');
-
     if(message.type === 'JOIN') {
         messageElement.classList.add('event-message');
         message.content = message.sender + ' joined!';
@@ -113,6 +117,13 @@ function getAvatarColor(messageSender) {
     var index = Math.abs(hash % colors.length);
     return colors[index];
 }
-
+// function messageBot(sayInReturn){
+//     stompClient.subscribe('/topic/public', sayInReturn);
+//     stompClient.send("/app/chat.sendMessage", {}, JSON.stringify(SimpleBot));
+//     messageInput.value = '';
+//     if(messageInput ==='PATTERNS_FOR_ANALYSIS'){
+//         messageElement.classList.add(SimpleBot.sayInReturn(chatMessage.getContent()));
+//     }
+// }
 usernameForm.addEventListener('submit', connect, true);
 messageForm.addEventListener('submit', sendMessage, true);
