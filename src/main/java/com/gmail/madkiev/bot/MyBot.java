@@ -69,7 +69,7 @@ public class MyBot {
     }};
     Map<String, String> answersByPatterns = new HashMap<String, String>() {{
         put("hello", "Здравствуйте, рад Вас видеть.");
-        put("who", "Я обычный чат-бот.");
+        put("who", "Jarvis(Intelligent System) - Programmed by MadKiev.");
         put("name", "Зовите меня Чаттер :)");
         put("howareyou", "Спасибо, что интересуетесь. У меня всё хорошо.");
         put("whatdoyoudoing", "Я пробую общаться с людьми.");

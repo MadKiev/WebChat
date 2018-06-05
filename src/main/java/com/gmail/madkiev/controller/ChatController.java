@@ -8,26 +8,33 @@ import org.springframework.messaging.handler.annotation.SendTo;
 import org.springframework.messaging.simp.SimpMessageHeaderAccessor;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 @Controller
 public class ChatController {
-    @MessageMapping("/chat.sendMessage")
-    @SendTo("/topic/public")
-    public ChatMessage sendMessage(@Payload ChatMessage chatMessage) {
-        return chatMessage;
-    }
+
 
     @MessageMapping("/chat.addUser")
     @SendTo("/topic/public")
-    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor){
+    public ChatMessage addUser(@Payload ChatMessage chatMessage, SimpMessageHeaderAccessor headerAccessor) {
         //add username in web socket session
         headerAccessor.getSessionAttributes().put("username", chatMessage.getSender());
         return chatMessage;
     }
-    @MessageMapping("/сhat.sendmessage")
+
+    @MessageMapping("/chat.sendMessage")
     @SendTo("/topic/public")
-        //ChatMessage был вместо String
-    public String chatBot(@Payload ChatMessage chatMessage){
+    public ArrayList<ChatMessage> botInput(@Payload ChatMessage userMessage) {
         MyBot bot = new MyBot();
-        return bot.sayInReturn(chatMessage. getContent());
+        ArrayList<ChatMessage> chatMessages = new ArrayList<>();
+        ChatMessage botAnswer = new ChatMessage();
+        botAnswer.setContent(bot.sayInReturn(userMessage.getContent()));
+        botAnswer.setSender("J.A.R.V.I.S");
+        botAnswer.setType(ChatMessage.MessageType.CHAT);
+        chatMessages.add(userMessage);
+        chatMessages.add(botAnswer);
+        return chatMessages;
     }
 }
